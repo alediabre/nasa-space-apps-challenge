@@ -13,6 +13,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from routers import population, impacts, horinzons_data, asteroids_data, mitigation
 from services.validation import get_api_key
 
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+
 app = FastAPI(title="Asteroids Metrics Service",
               version="1.0.0",
               description="Service to provide various metrics for asteroid impact scenarios.",
@@ -25,7 +27,7 @@ app = FastAPI(title="Asteroids Metrics Service",
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

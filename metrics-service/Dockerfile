@@ -1,5 +1,3 @@
-# pleiades-protocol-main/metrics-service/Dockerfile
-
 FROM python:3.12-slim
 
 # Establece el directorio de trabajo dentro del contenedor
@@ -18,10 +16,7 @@ COPY requirements.txt .
 # Instala los paquetes de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# --- CORRECCIÓN DEFINITIVA AQUÍ ---
-# Copia TODO el código fuente del servicio (incluyendo models, routers, etc.)
-# al directorio de trabajo /app del contenedor.
 COPY . .
 
 # Comando para iniciar el servidor cuando el contenedor se ejecute
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port 8080"]
