@@ -1,0 +1,22 @@
+:root {
+    --color-primary: #4f46e5;
+    --color-secondary: #5d8ce8;
+    --color-text: #111827;
+    --color-boder: #860768;
+}
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    overflow: hidden;
+    color: var(--color-text);
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: black;
+}
+
+
+* { box-sizing: border-box; }

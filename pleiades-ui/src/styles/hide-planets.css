@@ -1,0 +1,132 @@
+/* Hide Planets Panel Styles */
+.hide-planets-panel {
+  margin-bottom: 20px;
+}
+
+.planet-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.planet-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-height: 70px;
+}
+
+.planet-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.planet-card.hidden {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  opacity: 0.6;
+}
+
+.planet-card.hidden:hover {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.planet-card-image {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planet-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+.planet-card.hidden .planet-icon {
+  filter: grayscale(100%) brightness(0.5) drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+.planet-card-name {
+  font-size: 11px;
+  text-align: center;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
+}
+
+.planet-card.hidden .planet-card-name {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .planet-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .planet-card {
+    padding: 6px;
+    min-height: 65px;
+  }
+  
+  .planet-card-image {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .planet-card-name {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .planet-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .planet-card {
+    padding: 8px;
+    min-height: 60px;
+  }
+  
+  .planet-card-name {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .planet-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  
+  .planet-card {
+    padding: 4px;
+    min-height: 50px;
+  }
+  
+  .planet-card-image {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .planet-card-name {
+    font-size: 9px;
+  }
+}

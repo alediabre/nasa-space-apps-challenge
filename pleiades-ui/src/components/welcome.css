@@ -1,0 +1,190 @@
+/* Welcome screen styles */
+.welcome-root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Use the project asset as the background (stars/galaxy) */
+  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/src/assets/stars-galaxy-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 5000;
+  overflow: hidden;
+}
+
+/* smooth exit - crossfade, slight scale, and blur the background */
+.welcome-root.exiting {
+  /* slower, smooth zoom-in with illumination */
+  transition: opacity 1200ms cubic-bezier(.2,.9,.2,1), transform 1200ms cubic-bezier(.2,.9,.2,1), filter 1200ms ease;
+  opacity: 0;
+  /* zoom slightly IN to create a cinematic push-through feel */
+  transform: scale(1.08) translateY(-10px);
+  filter: blur(2px) saturate(1.05) contrast(1.02);
+  pointer-events: none;
+}
+
+.welcome-root.exiting .welcome-asteroids,
+.welcome-root.exiting .welcome-center {
+  transition: opacity 1000ms ease, transform 1000ms ease;
+  opacity: 0;
+  transform: scale(0.985);
+}
+
+/* full-screen warm illumination that fades in during exit */
+.burn-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 6000;
+  transition: opacity 1200ms cubic-bezier(.2,.9,.2,1), transform 1200ms cubic-bezier(.2,.9,.2,1);
+  transform: scale(1);
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 40% 30%, rgba(255,200,120,0.28), rgba(255,120,50,0.12) 20%, rgba(0,0,0,0) 55%), linear-gradient(180deg, rgba(255,120,40,0.06), rgba(0,0,0,0));
+}
+
+.welcome-root.exiting .burn-overlay {
+  opacity: 0.82;
+  transform: scale(1.02) translateY(-6px);
+}
+
+.welcome-asteroids {
+  position: absolute;
+  inset: 0;
+  /* allow pointer events on children while root still receives mousemove if needed */
+  pointer-events: auto;
+}
+.welcome-asteroids .asteroid {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  transform-origin: center;
+  will-change: transform;
+  pointer-events: auto; /* enable hover */
+  z-index: 10;
+  overflow: hidden; /* clip glow to the asteroid box */
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* inner element holds the visual and the glow so the glow is clipped */
+.welcome-asteroids .asteroid .asteroid-inner {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/asteroid.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.95;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.7));
+  transform-origin: center;
+  will-change: transform, filter;
+}
+
+.welcome-asteroids .asteroid .asteroid-burn {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform-origin: center;
+  filter: brightness(1.05) saturate(1.1);
+  transition: opacity 320ms ease, transform 220ms ease;
+  border-radius: 6px;
+}
+
+/* removed decorative glow overlay - keeping burn overlay only */
+
+.welcome-asteroids .asteroid:hover .asteroid-burn,
+.welcome-asteroids .asteroid:focus .asteroid-burn {
+  opacity: 1;
+}
+
+/* Individual asteroid positions & animations */
+.asteroid.a-1 { left: 5%; top: 10%; animation: float1 9s ease-in-out infinite; transform: scale(0.85); }
+.asteroid.a-2 { left: 75%; top: 5%; animation: float2 10.5s ease-in-out infinite; transform: scale(1.05); }
+.asteroid.a-3 { left: 50%; top: 70%; animation: float3 8.5s ease-in-out infinite; transform: scale(0.75); }
+.asteroid.a-4 { left: 20%; top: 50%; animation: float4 11s ease-in-out infinite; transform: scale(0.95); }
+.asteroid.a-5 { left: 85%; top: 50%; animation: float1 9.5s ease-in-out infinite; transform: scale(0.8); }
+.asteroid.a-6 { left: 40%; top: 20%; animation: float2 12s ease-in-out infinite; transform: scale(0.9); }
+.asteroid.a-7 { left: 10%; top: 80%; animation: float3 13.5s ease-in-out infinite; transform: scale(0.75); }
+.asteroid.a-8 { left: 80%; top: 80%; animation: float4 12.5s ease-in-out infinite; transform: scale(1); }
+
+@keyframes float1 {
+  0% { transform: translate3d(0,0,0) rotate(0deg); }
+  25% { transform: translate3d(-18px,-12px,0) rotate(12deg); }
+  50% { transform: translate3d(6px,-28px,0) rotate(28deg); }
+  75% { transform: translate3d(22px,-8px,0) rotate(18deg); }
+  100% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+@keyframes float2 {
+  0% { transform: translate3d(0,0,0) rotate(0deg); }
+  25% { transform: translate3d(20px,8px,0) rotate(-10deg); }
+  50% { transform: translate3d(-10px,34px,0) rotate(-36deg); }
+  75% { transform: translate3d(-28px,12px,0) rotate(-22deg); }
+  100% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+@keyframes float3 {
+  0% { transform: translate3d(0,0,0) rotate(0deg); }
+  25% { transform: translate3d(-12px,6px,0) rotate(6deg); }
+  50% { transform: translate3d(8px,-18px,0) rotate(22deg); }
+  75% { transform: translate3d(14px,4px,0) rotate(12deg); }
+  100% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+@keyframes float4 {
+  0% { transform: translate3d(0,0,0) rotate(0deg); }
+  25% { transform: translate3d(12px,10px,0) rotate(-8deg); }
+  50% { transform: translate3d(-6px,22px,0) rotate(-18deg); }
+  75% { transform: translate3d(-18px,6px,0) rotate(-10deg); }
+  100% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+
+.welcome-center {
+  z-index: 5100;
+  text-align: center;
+  color: white;
+}
+.welcome-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 128px;
+  line-height: 0.85;
+  margin: 0 0 28px 0;
+  /* Blue glowy gradient */
+  background: linear-gradient(90deg, #00d4ff 0%, #006bff 45%, #4c8bff 75%, #bfe6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 12px 36px rgba(0,120,255,0.25), 0 2px 8px rgba(0,60,120,0.35);
+  letter-spacing: -2px;
+  font-weight: 800;
+  /* Gentle floating animation */
+  animation: titleFloat 6s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+.welcome-cta {
+  margin-top: 16px;
+  background: linear-gradient(90deg, #0088ff, #0047b3);
+  border: none;
+  color: white;
+  padding: 18px 36px;
+  font-size: 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 18px 45px rgba(0,120,255,0.28), 0 8px 20px rgba(0,60,120,0.22) inset;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.welcome-cta:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,140,255,0.35), 0 8px 28px rgba(0,60,120,0.28) inset; }
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .welcome-title { font-size: 48px; }
+  .welcome-asteroids .asteroid { width: 128px; height: 128px; }
+  .welcome-cta { font-size: 16px; padding: 12px 20px; }
+}

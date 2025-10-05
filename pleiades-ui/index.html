@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pleiades-UI</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Show fatal errors before React mounts
+      window.addEventListener('error', function (e) {
+        try {
+          const root = document.getElementById('root');
+          if (root) {
+            root.innerHTML = `<pre style="color:#fff;background:#b00020;padding:12px;">Fatal: ${e.message || e.error || e}</pre>`;
+          }
+        } catch (err) {
+          console.error('Index error handler failed', err);
+        }
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+        try {
+          const root = document.getElementById('root');
+          if (root) {
+            root.innerHTML = `<pre style="color:#fff;background:#b00020;padding:12px;">Unhandled Rejection: ${e.reason?.message || e.reason || e}</pre>`;
+          }
+        } catch (err) {
+          console.error('Index rejection handler failed', err);
+        }
+      });
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic
+numpy
+shapely
+rasterio
+pyproj
+python-dotenv
+httpx

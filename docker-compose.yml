@@ -1,0 +1,19 @@
+# pleiades-protocol-main/docker-compose.yml
+
+services:
+  pleiades-ui:
+    build: ./pleiades-ui
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./pleiades-ui:/app
+      - /app/node_modules
+
+  metrics-service:
+    build: ./metrics-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./metrics-service:/app
+    environment:
+      - API_KEY=${API_KEY}

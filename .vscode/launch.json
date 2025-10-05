@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "▶️ Iniciar Backend (Python)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "main:app",
+        "--reload"
+      ],
+      "cwd": "${workspaceFolder}/pleiades-protocol-main/metrics-service",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe"
+    },
+    {
+      "name": "🚀 Iniciar Frontend (React)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}/pleiades-protocol-main/pleiades-ui"
+    }
+  ]
+}

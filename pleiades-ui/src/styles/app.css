@@ -1,0 +1,84 @@
+/* Main app layout - responsive grid system */
+.app-container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  height: 100vh;
+  transition: grid-template-columns 0.3s ease;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 1199px) {
+  .app-container {
+    grid-template-columns: 35% 65%;
+  }
+}
+
+@media (max-width: 899px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+@media (max-width: 599px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-content {
+  position: relative;
+  background: #000;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Canvas container responsive adjustments */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Speed overlay responsive positioning */
+.speed-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5rem;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  z-index: 10;
+  pointer-events: none;
+  transition: bottom 0.3s ease;
+}
+
+@media (max-width: 899px) {
+  .speed-overlay {
+    bottom: 3rem;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 599px) {
+  .speed-overlay {
+    bottom: 2rem;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 479px) {
+  .speed-overlay {
+    bottom: 1.5rem;
+    padding: 0 4px;
+  }
+}
+
+.speed-overlay > * {
+  pointer-events: auto;
+  max-width: 100%;
+}
